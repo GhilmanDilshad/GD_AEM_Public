@@ -66,16 +66,6 @@ class Potentials_Line_River_Complex:
         z1_Line = (x1 + y1 * 1j)
         z2_Line = (x2 + y2 * 1j)
 
-        # # Height of Creek Bed Above Base Page 316 Strack and it Should Always Be less then H 
-        # H0 = [18]
-        # # Resistance of Creek Bed of Unit (m/d) page 316 Strack has mistake in unit of c
-        # c = [5]
-        # # width of Creek Unit (m)
-        # b = [25]
-        # phi_creek_0 = [20]
-        # # Calculation for Sigma 
-        # Sigma_line = 
-
         return  z1_Line, z2_Line, Sigma_line
 
     def phi_0_line_river_complex(self):  # by using condition from book at page number39 #this is discharge potential for confined and unconfined 
@@ -91,7 +81,6 @@ class Potentials_Line_River_Complex:
         # print('this is phi_0 with Lake', phi_0)
         return phi_0_line_complex
 
-
     def phi_uniform_flow_field_line_river_complex(self):   # calculation for Qox.X (base FlowX)
         
         vector = Vectors_Line_River_Complex()
@@ -103,7 +92,6 @@ class Potentials_Line_River_Complex:
 
         return phi_uniform_flow_field_line_complex
 
-
     def calculation_inflow_outflow_line_river_complex(self):
         vector = Vectors_Line_River_Complex()
         _, _, _, _, _, _, Z, _, _ = vector.region_boundaries_line_river_complex()
@@ -114,8 +102,7 @@ class Potentials_Line_River_Complex:
         Capital_Z = []
         Lentgh_of_Creek = []
         Sigma_line_array = np.array(Sigma_line)
-        # print('This is sigma line', Sigma_line_array)
-        # For Calculation of lentgh of Creek
+         # For Calculation of lentgh of Creek
         for i in range(len(Sigma_line_array)):
             lentgh_of_creek = np.absolute(z2_Line[i]-z1_Line[i]) 
             Lentgh_of_Creek.append(lentgh_of_creek)

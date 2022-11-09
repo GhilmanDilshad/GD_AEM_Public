@@ -143,7 +143,6 @@ class Potentials_Lake_River_Complex:
            phi_inflow_outflow_complex += phi_inflow_outflow_complex_q   
 
         return phi_inflow_outflow_complex
-
    
     def calculation_phi_well_lake_river_complex(self):
         vector = Vectors_Lake_River_Complex()
@@ -157,7 +156,6 @@ class Potentials_Lake_River_Complex:
         well_image_list = []
         trying_well_images = Zw * -1
         actual_well_images = np.conjugate(trying_well_images)
-  
             
         for i in range(len(pumping_array)):
             phi_well_lake_q = (pumping_array[i] / (2*np.pi)) * np.log((((Z)-Zw[i]) / ((Z) - (actual_well_images[i])) * (R_lake_array/np.absolute(Zw[i]))))
@@ -165,7 +163,6 @@ class Potentials_Lake_River_Complex:
             phi_well_lake_complex += phi_well_lake_q
 
         return phi_well_lake_complex
-
 
     def dischargepotential_total_of_region_lake_river_complex(self):
         phi_uniform_flow_field = self.phi_uniform_flow_field_river_complex()
