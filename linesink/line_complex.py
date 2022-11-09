@@ -58,7 +58,7 @@ class Potentials_Line_Complex:
         y1_Line = [50]
         y2_Line = [150]
         # Extraction (Positive) or Inflitration (Negative) Rate of Line-Sink
-        Sigma_line = [-5] 
+        Sigma_line = [-1] 
                
         x1 = np.array(x1_Line)
         x2 = np.array(x2_Line)

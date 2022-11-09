@@ -112,10 +112,10 @@ from lake.read_and_save_data import ReadAndSaveLakeData
 
 # Stagnation Points
 
-# GD_trying_stagnation_points_by_strack = contribution_ratio_river_and_well_strack_GD()
-# limit_of_stagnation_Points_GD = GD_trying_stagnation_points_by_strack.limit_of_stagnations_points_by_strack()
-# stagnation_points_GD = GD_trying_stagnation_points_by_strack.calculation_for_stagnation_points_formula_by_holzbecher_and_strack()
-# discharge_at_stagnation_points = GD_trying_stagnation_points_by_strack.calculation_for_discharge_at_stagnation_points()
+GD_trying_stagnation_points_by_strack = contribution_ratio_river_and_well_strack_GD()
+limit_of_stagnation_Points_GD = GD_trying_stagnation_points_by_strack.limit_of_stagnations_points_by_strack()
+stagnation_points_GD = GD_trying_stagnation_points_by_strack.calculation_for_stagnation_points_formula_by_holzbecher_and_strack()
+discharge_at_stagnation_points = GD_trying_stagnation_points_by_strack.calculation_for_discharge_at_stagnation_points()
 
 # Stagnation_points_lake_plus_wells_no_river = working_for_lake_plus_well_No_River()
 # stagnation_points_Lake_and_river = Stagnation_points_lake_plus_wells_no_river.stagnation_points_lake_plus_well()
@@ -123,8 +123,8 @@ from lake.read_and_save_data import ReadAndSaveLakeData
 # lake_plus_river = working_for_lake_plus_well_with_River()
 # stagnations_Points_and_filtrate = lake_plus_river.stagnation_points_lake_and_well_plus_river()
 
-lake_no_river_GD = working_for_lake_plus_well_No_River_GD()
-stagnation_points = lake_no_river_GD.stagnation_points_lake_and_well_noriver_GD()
+# lake_no_river_GD = working_for_lake_plus_well_No_River_GD()
+# stagnation_points = lake_no_river_GD.stagnation_points_lake_and_well_noriver_GD()
 
 
 # plots1 = Plotting()

@@ -72,18 +72,18 @@ class contribution_ratio_river_and_well_strack_GD:
         # print('2ndddddddddddddddddddd',calculating_discharge_by_this_approach_2)
 
        # Staaaack
-        if x >= 1:
-            print("Stagnation Points Exists Ghilman")
+        # if x >= 1:
+        #     print("Stagnation Points Exists Ghilman")
 
-            stagnation_point_by_strack = sp.Eq(Ys**2, ((Zw.real[0])**2) +  (((Zw.real[0])*pumping_array[0])/(np.pi*baseFlowX)))
+        #     stagnation_point_by_strack = sp.Eq(Ys**2, ((Zw.real[0])**2) +  (((Zw.real[0])*pumping_array[0])/(np.pi*baseFlowX)))
         
-            stagnation_point_by_strack_solution = sp.solve(stagnation_point_by_strack)
-            # print('These are two stagnation Points Not Corrected By Strack', stagnation_point_by_strack_solution)
+        #     stagnation_point_by_strack_solution = sp.solve(stagnation_point_by_strack)
+        #     # print('These are two stagnation Points Not Corrected By Strack', stagnation_point_by_strack_solution)
 
-            corrected_stagnation_points_by_strack = (stagnation_point_by_strack_solution + well_distance )
-            print('Stracccck',corrected_stagnation_points_by_strack)
-        else: 
-            print('No Stagnation Points Exist')
+        #     corrected_stagnation_points_by_strack = (stagnation_point_by_strack_solution + well_distance )
+        #     print('Stracccck',corrected_stagnation_points_by_strack)
+        # else: 
+        #     print('No Stagnation Points Exist')
         
         #       HOLZBECHER
         if x >= 1:
@@ -103,7 +103,7 @@ class contribution_ratio_river_and_well_strack_GD:
             print("Stagnation Points Exist ")
 
             Zs = sp.symbols('Zs')
-            unseprated_equation_strack = sp.Eq((baseFlowX - ( (pumping_array[0]/(2*np.pi)) * (1/(Zs-Zw[0])) ) + ( (pumping_array[0]/(2*np.pi)) * (1/(Zs-corrected_well_image1[0])) ) ),0)
+            unseprated_equation_strack = sp.Eq((baseFlowX + ( (pumping_array[0]/(2*np.pi)) * (1/(Zs-corrected_well_image1[0])) ) - ( (pumping_array[0]/(2*np.pi)) * (1/(Zs-Zw[0])) ) ),0)
             Unserpated_solution_combine = sp.solve(unseprated_equation_strack)
             print('by whole formula',Unserpated_solution_combine)
             corrected_unseprated = Unserpated_solution_combine + Zw[0].imag
@@ -113,13 +113,13 @@ class contribution_ratio_river_and_well_strack_GD:
             corrected_stagnation_points_by_holzbecher = []
             corrected_stagnation_points_by_strack = []
             corrected_unseprated = []
-        return corrected_stagnation_points_by_holzbecher, corrected_stagnation_points_by_strack, corrected_unseprated
+        return corrected_stagnation_points_by_holzbecher, corrected_unseprated #,corrected_stagnation_points_by_strack
 
     def calculation_for_discharge_at_stagnation_points(self):
-        corrected_stagnation_points_by_holzbecher, corrected_stagnation_points_by_strack, corrected_unseprated = self.calculation_for_stagnation_points_formula_by_holzbecher_and_strack()
-        if len(corrected_stagnation_points_by_holzbecher) !=0 and len(corrected_stagnation_points_by_strack) !=0 and len(corrected_unseprated) !=0 :
+        corrected_stagnation_points_by_holzbecher,  corrected_unseprated = self.calculation_for_stagnation_points_formula_by_holzbecher_and_strack()
+        if len(corrected_stagnation_points_by_holzbecher) !=0  and len(corrected_unseprated) !=0 : #and len(corrected_stagnation_points_by_strack) !=0
             Stagnation_points_holzbecher = np.fromiter(corrected_stagnation_points_by_holzbecher, dtype=float)
-            Stagnation_points_strack = np.fromiter(corrected_stagnation_points_by_strack, dtype=float)
+            # Stagnation_points_strack = np.fromiter(corrected_stagnation_points_by_strack, dtype=float)
             S_P_Combine = np.fromiter(corrected_unseprated, dtype=complex)
 
             S_P_by_me_1 = S_P_Combine.real[0] *1j
@@ -132,9 +132,9 @@ class contribution_ratio_river_and_well_strack_GD:
             print('y1 holzebecher',y1_holzbecher)
             print('y2 holzbecher', y2_holzbecher)
 
-            y1_strack = (Stagnation_points_strack[0]) *1j
-            y2_strack = (Stagnation_points_strack[1]) *1j
-            print('y1strack',y1_strack)
+            # y1_strack = (Stagnation_points_strack[0]) *1j
+            # y2_strack = (Stagnation_points_strack[1]) *1j
+            # print('y1strack',y1_strack)
             vectors_data_river = Vectors_river_complex()
             xmesh, ymesh, Xmin, Xmax, Ymin, Ymax, Z = vectors_data_river.region_boundaries_river_complex()
 
@@ -146,50 +146,51 @@ class contribution_ratio_river_and_well_strack_GD:
             corrected_well_image = (np.conjugate(well_images_behind_river))
                 
             capture_lentgh_holzbecher = np.abs(Stagnation_points_holzbecher[1]) - (Stagnation_points_holzbecher[0])
-            capture_lentgh_strack = np.abs(Stagnation_points_strack[1]) - (Stagnation_points_strack[0])
+            # capture_lentgh_strack = np.abs(Stagnation_points_strack[1]) - (Stagnation_points_strack[0])
             combine_capture_length_by_unseprated_formula = np.abs(S_P_Combine[1] - S_P_Combine[0])
             print('This is Capture Lentgh By Holzbecher',capture_lentgh_holzbecher)
-            print('This is Capture Lentgh By Strack',capture_lentgh_strack)
+            # print('This is Capture Lentgh By Strack',capture_lentgh_strack)
             print('This is Combine Capture Lentgh By Unseprated Strack Formula',combine_capture_length_by_unseprated_formula)
 
             Holzbecher_discharge_passing_through_stagnation_point_1 = (-baseFlowX * y1_holzbecher) - (pumping_array[0]/(2*np.pi)) * ((np.log(y1_holzbecher-Zw[0])) - (np.log(y1_holzbecher-corrected_well_image[0])))
 
             Holzbecher_discharge_passing_through_stagnation_point_2 = (-baseFlowX * y2_holzbecher) - (pumping_array[0]/(2*np.pi)) * ((np.log(y2_holzbecher-Zw[0])) - (np.log(y2_holzbecher-corrected_well_image[0])))        
 
-            Strack_discharge_passing_through_stagnation_point_1 = (-baseFlowX * y1_strack) + (pumping_array[0]/(2*np.pi)) * ((np.log(y1_strack-Zw[0])) - (np.log(y1_strack-corrected_well_image[0])))
+            # Strack_discharge_passing_through_stagnation_point_1 = (-baseFlowX * y1_strack) + (pumping_array[0]/(2*np.pi)) * ((np.log(y1_strack-Zw[0])) - (np.log(y1_strack-corrected_well_image[0])))
 
-            Strack_discharge_passing_through_stagnation_point_2 = (-baseFlowX * y2_strack) + (pumping_array[0]/(2*np.pi)) * ((np.log(y2_strack-Zw[0])) - (np.log(y2_strack-corrected_well_image[0])))     
+            # Strack_discharge_passing_through_stagnation_point_2 = (-baseFlowX * y2_strack) + (pumping_array[0]/(2*np.pi)) * ((np.log(y2_strack-Zw[0])) - (np.log(y2_strack-corrected_well_image[0])))     
 
 
             # This is Discharge at stagnation points which we got from combine formula calculating only at the stagnation points of Y axis where x= 0
-            Ghilman_discharge_passing_through_stagnation_point_1 = (-baseFlowX * (S_P_by_me_1)) + (pumping_array[0]/(2*np.pi)) * ((np.log((S_P_by_me_1)-Zw[0])) - (np.log((S_P_by_me_1)-corrected_well_image[0])))
+            Ghilman_discharge_passing_through_stagnation_point_1 = (-baseFlowX * (S_P_by_me_1)) - (pumping_array[0]/(2*np.pi)) * ((np.log((S_P_by_me_1)-Zw[0])) - (np.log((S_P_by_me_1)-corrected_well_image[0])))
 
-            Ghilman_discharge_passing_through_stagnation_point_2 = (-baseFlowX * (S_P_by_me_2)) + (pumping_array[0]/(2*np.pi)) * ((np.log((S_P_by_me_2)-Zw[0])) - (np.log((S_P_by_me_2)-corrected_well_image[0])))     
+            Ghilman_discharge_passing_through_stagnation_point_2 = (-baseFlowX * (S_P_by_me_2)) - (pumping_array[0]/(2*np.pi)) * ((np.log((S_P_by_me_2)-Zw[0])) - (np.log((S_P_by_me_2)-corrected_well_image[0])))     
 
             print('This is discharge passing through stagnation point 1 by Holzbecher',Holzbecher_discharge_passing_through_stagnation_point_1)
             print('This is discharge passing through stagnation point 2 by Holzbecher',Holzbecher_discharge_passing_through_stagnation_point_2)
 
-            print('This is discharge passing through stagnation point 1 by Strack',Strack_discharge_passing_through_stagnation_point_1)
-            print('This is discharge passing through stagnation point 2 by Strack',Strack_discharge_passing_through_stagnation_point_2)
+            # print('This is discharge passing through stagnation point 1 by Strack',Strack_discharge_passing_through_stagnation_point_1)
+            # print('This is discharge passing through stagnation point 2 by Strack',Strack_discharge_passing_through_stagnation_point_2)
 
             print('This is Discharge passing through at Stag 1 by actual formula', Ghilman_discharge_passing_through_stagnation_point_1)
             print('This is Discharge passing through at Stag 2 by actual formula', Ghilman_discharge_passing_through_stagnation_point_2)
             bank_filtrate_holzbecher = Holzbecher_discharge_passing_through_stagnation_point_2.imag - Holzbecher_discharge_passing_through_stagnation_point_1.imag + pumping_array[0]
-            bank_filtrate_strack =  Strack_discharge_passing_through_stagnation_point_2.imag - Strack_discharge_passing_through_stagnation_point_1.imag + pumping_array[0]
+            # bank_filtrate_strack =  Strack_discharge_passing_through_stagnation_point_2.imag - Strack_discharge_passing_through_stagnation_point_1.imag + pumping_array[0]
             bank_filtrate_by_me = Ghilman_discharge_passing_through_stagnation_point_2.imag - Ghilman_discharge_passing_through_stagnation_point_1.imag + pumping_array[0]
 
             print('This is Bank Filtrate Portion By Holzbecher',bank_filtrate_holzbecher)
-            print('This is Bank Filtrate Portion By Strack',bank_filtrate_strack)
+            # print('This is Bank Filtrate Portion By Strack',bank_filtrate_strack)
             print('This is Bank Filtrate Portion By Ghilman',bank_filtrate_by_me)
             contribution_ratio_holzbecher = np.round((bank_filtrate_holzbecher / pumping_array[0]),decimals=3)
-            contribution_ratio_strack = np.round((bank_filtrate_strack / pumping_array[0]),decimals=3)
+            # contribution_ratio_strack = np.round((bank_filtrate_strack / pumping_array[0]),decimals=3)
             contribution_ratio_ghilman = np.round((bank_filtrate_by_me / pumping_array[0]),decimals=3)
 
 
             print('This is Contribution Ratio By Holzbecher',contribution_ratio_holzbecher)
-            print('This is Contribution Ratio By Strack',contribution_ratio_strack)
+            # print('This is Contribution Ratio By Strack',contribution_ratio_strack)
             print('This is Contribution Ratio By Ghilman',contribution_ratio_ghilman)
-
+            print('This Contribution Ratio Percentage by Holzbecher',contribution_ratio_holzbecher*100,'%' )
+            print('This Contribution Ratio Percentage by Ghilman',contribution_ratio_ghilman*100,'%')
         # Here I will Try Stagnation Points in Combination Together without sepration
         else:
             exit
