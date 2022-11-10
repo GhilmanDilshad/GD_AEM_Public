@@ -112,10 +112,10 @@ from lake.read_and_save_data import ReadAndSaveLakeData
 
 # Stagnation Points
 
-GD_trying_stagnation_points_by_strack = contribution_ratio_river_and_well_strack_GD()
-limit_of_stagnation_Points_GD = GD_trying_stagnation_points_by_strack.limit_of_stagnations_points_by_strack()
-stagnation_points_GD = GD_trying_stagnation_points_by_strack.calculation_for_stagnation_points_formula_by_holzbecher_and_strack()
-discharge_at_stagnation_points = GD_trying_stagnation_points_by_strack.calculation_for_discharge_at_stagnation_points()
+# GD_trying_stagnation_points_by_strack = contribution_ratio_river_and_well_strack_GD()
+# limit_of_stagnation_Points_GD = GD_trying_stagnation_points_by_strack.limit_of_stagnations_points_by_strack()
+# stagnation_points_GD = GD_trying_stagnation_points_by_strack.calculation_for_stagnation_points_formula_by_holzbecher_and_strack()
+# discharge_at_stagnation_points = GD_trying_stagnation_points_by_strack.calculation_for_discharge_at_stagnation_points()
 
 # Stagnation_points_lake_plus_wells_no_river = working_for_lake_plus_well_No_River()
 # stagnation_points_Lake_and_river = Stagnation_points_lake_plus_wells_no_river.stagnation_points_lake_plus_well()
@@ -172,16 +172,3 @@ while True:
     elif choose_answer == "6":
         plotting_line_complex_river= plots.line_complex_river()
         break  
-
-
-# normal_without_complex= plots.plot_normal_well_without_river()
-# complex_plot = plots.plotting_complex()
-# complex_plot_unseprated = plots.plotting_complex_without_sepration()
-# Plotting_river_Complex = plots.river_complex()
-# Plotting_With_River= plots.river()
-# Plotting_With_Lake = plots.lake() 
-# plotting_lake_complex = plots.lake_complex()
-# plotting_lake_river_complex= plots.lake_river_complex()
-# plotting_complex = plots.line_complex()
-# plotting_line_complex_river= plots.line_complex_river()
-        
