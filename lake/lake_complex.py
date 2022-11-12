@@ -182,46 +182,6 @@ class Potentials_Lake_Complex:
             image_creation_of_wells = (1 * Z_Lake) + 0.4
             Z_Lake_for_image_creation.append(image_creation_of_wells)
 
-        # Theta_pumping_well = []
-        # Theta_recharge_well = []
-        # Modulus_pumping_well = []
-        # Modulus_recahrge_well = []
-        # images_of_wells = []
-        # phi_well_and_mirror_well_complex = 0
-
-        # # Calculation for Pumping Well Modulus
-        # for i in range(len(Zw)):
-        #     modulus_pumping_well = np.absolute((Z-Zw[i]))
-        #     Modulus_pumping_well.append(modulus_pumping_well)
-        # # print('These are modulus pumping well', Modulus_pumping_well)
-        
-        # # Calculation for Angle/Argument at every mesh for pumping well
-        # for i in range(len(Zw)):
-        #     theta1 = np.angle(Z-Zw[i])
-        #     Theta_pumping_well.append(theta1)
-        # # print('These are theta values for pumping recharge well', Theta_pumping_well)
-
-        # # Well Images Creation 
-        # for i in range(len(Zw)):
-        #     well_images_inside_lake = (1* Z_Lake) +0.4
-        #     images_of_wells.append(well_images_inside_lake)
-
-        # # print('These are well Images for river comples', images_of_wells)
-
-        # # Calculation for Recharge Well Modulus
-        # for i in range(len(Zw)):
-        #     modulus_recharge_well = np.absolute((Z - (images_of_wells[i])))
-        #     Modulus_recahrge_well.append(modulus_recharge_well)
-
-        # # print('These are modulus of image recharge well behind river', Modulus_recahrge_well)    
-
-        # # Calculation for Angle/Argument at every mesh for recharge well    
-        # for i in range(len(Zw)):
-        #     theta2 = np.angle(Z-images_of_wells[i])
-        #     Theta_recharge_well.append(theta2)
-        # # print('These are theta values for image recharge well', Theta_recharge_well)
-
-
         for i in range(len(pumping_array)):
             phi_well_lake_q = (pumping_array[i] / (2*np.pi)) * np.log((((Z)-Zw[i]) / ((Z) - (Z_Lake_for_image_creation[i]))) * (R_lake_array/np.absolute(Zw[i])))
             

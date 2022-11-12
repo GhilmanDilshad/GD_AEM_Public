@@ -114,7 +114,8 @@ class Potentials_Line_River_Complex:
             Capital_Z.append(capital_Z)
         
         for i in range(len(Sigma_line_array)):
-           phi_inflow_outflow_line_complex_q =  ((Sigma_line_array[i] * Lentgh_of_Creek[i]) / (4 * np.pi)) * (((Capital_Z[i] + 1)*np.log(Capital_Z[i] + 1)) - ((Capital_Z[i] - 1)*np.log(Capital_Z[i] - 1)) - 2 )
+           phi_inflow_outflow_line_complex_q =  ((Sigma_line_array[i] * Lentgh_of_Creek[i]) / (
+            4 * np.pi)) * (((Capital_Z[i] + 1)*np.log(Capital_Z[i] + 1)) - ((Capital_Z[i] - 1)*np.log(Capital_Z[i] - 1)) - 2 )
            
            phi_inflow_outflow_line_complex += phi_inflow_outflow_line_complex_q   
 

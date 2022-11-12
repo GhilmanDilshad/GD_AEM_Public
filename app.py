@@ -144,11 +144,11 @@ while True:
 
     choose_answer = input("Which program do you want to choose from 1-6: ")
 
-    '''aquifer_input = SaveAquiferData()
+    aquifer_input = SaveAquiferData()
     aquifer_input.aquifier_save_To_Excel()
 
     wells_input = SaveWellData()
-    wells_input.wells_save_To_Excel()'''  
+    wells_input.wells_save_To_Excel()
 
     if choose_answer == "1":
         complex_plot_unseprated = plots.plotting_complex_without_sepration()
