@@ -158,12 +158,10 @@ while True:
         break
     elif choose_answer == "3":
         lake_data = ReadAndSaveLakeData()
-        #lake_data.save_lake_data()
         plotting_lake_complex = plots.lake_complex()
         break
     elif choose_answer == "4":
         lake_data = ReadAndSaveLakeData()
-        #lake_data.save_lake_data()
         plotting_lake_river_complex= plots.lake_river_complex()
         break
     elif choose_answer == "5":
